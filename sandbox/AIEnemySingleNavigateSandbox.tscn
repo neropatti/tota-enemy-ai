@@ -1,0 +1,201 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/Locations/Forest/ForestFlooring.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/AI/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sandbox/YSort.gd" type="Script" id=4]
+[ext_resource path="res://sandbox/MusicSlider.gd" type="Script" id=5]
+[ext_resource path="res://sandbox/AttackSlider.gd" type="Script" id=6]
+[ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sandbox/EnemySandbox.gd" type="Script" id=8]
+[ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-E.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-B.tscn" type="PackedScene" id=10]
+[ext_resource path="res://wwise/runtime/nodes/ak_event_2d.gd" type="Script" id=11]
+[ext_resource path="res://src/Locations/Common/Borders.gd" type="Script" id=12]
+[ext_resource path="res://src/Locations/Moorlands/MoorlandsBorders.tres" type="TileSet" id=13]
+[ext_resource path="res://src/HUDContainer.tscn" type="PackedScene" id=14]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 227, 63, 191, 271, 36, 267, 37, 62, 300, 743, 450, 736, 560, 739, 834, 748, 1280, 767, 205, 750, 728, 335, 1022, 595, 797, 667, 555, 656, 309, 585, 306, 483, 528, 335, 1074, 679, 1150, 638, 1235, 653, 728, 167, 1112, 135, 1280, 135, 1225, 565, 1140, 560, 201, 646, 155, 720, 154, 617, 191, 581, 194, 480, 130, 550, 129, 459, 454, 660, 293, 646, 0, 63, 1112, 63, 528, 167, 38, 621, 30, 549, 36, 461, 0, 759, 38, 723 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 8, 9 ), PoolIntArray( 10, 11, 12, 13, 14, 15, 16 ), PoolIntArray( 17, 18, 19, 8 ), PoolIntArray( 10, 20, 21, 22, 23, 24 ), PoolIntArray( 22, 8, 19, 23 ), PoolIntArray( 25, 9, 26, 27, 28 ), PoolIntArray( 12, 7, 6, 13 ), PoolIntArray( 29, 28, 27, 30, 31 ), PoolIntArray( 14, 13, 32, 33, 28 ), PoolIntArray( 34, 35, 21, 20, 36 ), PoolIntArray( 5, 4, 33, 32 ), PoolIntArray( 28, 33, 25 ), PoolIntArray( 30, 27, 37, 38 ), PoolIntArray( 18, 17, 11, 24 ), PoolIntArray( 10, 24, 11 ), PoolIntArray( 34, 36, 16, 15, 29, 31 ), PoolIntArray( 34, 31, 39 ), PoolIntArray( 40, 34, 39, 38 ), PoolIntArray( 40, 38, 37, 41 ), PoolIntArray( 40, 41, 26, 9 ), PoolIntArray( 8, 40, 9 ), PoolIntArray( 8, 7, 17 ) ]
+outlines = [ PoolVector2Array( 0, 63, 1112, 63, 1112, 135, 1280, 135, 1280, 767, 0, 759 ), PoolVector2Array( 528, 167, 528, 335, 728, 335, 728, 167 ), PoolVector2Array( 37, 63, 36, 267, 191, 271, 227, 63 ), PoolVector2Array( 1140, 560, 1150, 638, 1235, 653, 1225, 565 ), PoolVector2Array( 1022, 595, 797, 667, 834, 748, 1074, 679 ), PoolVector2Array( 454, 660, 450, 736, 560, 739, 555, 656 ), PoolVector2Array( 194, 480, 191, 581, 309, 585, 306, 483 ), PoolVector2Array( 36, 461, 30, 549, 130, 550, 129, 459 ), PoolVector2Array( 38, 621, 38, 723, 155, 720, 154, 617 ), PoolVector2Array( 201, 646, 205, 750, 300, 743, 293, 646 ) ]
+
+[node name="EnemySandbox" type="Node2D"]
+position = Vector2( 0, 1 )
+script = ExtResource( 8 )
+
+[node name="TileMap" type="TileMap" parent="."]
+use_parent_material = true
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 65544, 2, 0, 131078, 3, 0, 65544, 4, 0, 0, 5, 0, 1, 6, 0, 131077, 7, 0, 65539, 8, 0, 4, 9, 0, 65542, 10, 0, 0, 11, 0, 131080, 12, 0, 5, 13, 0, 0, 14, 0, 65542, 15, 0, 65542, 16, 0, 4, 17, 0, 0, 18, 0, 0, 19, 0, 131079, 65536, 0, 2, 65537, 0, 7, 65538, 0, 131073, 65539, 0, 6, 65540, 0, 7, 65541, 0, 131076, 65542, 0, 131077, 65543, 0, 5, 65544, 0, 0, 65545, 0, 65544, 65546, 0, 0, 65547, 0, 131080, 65548, 0, 1, 65549, 0, 65542, 65550, 0, 131075, 65551, 0, 65537, 65552, 0, 0, 65553, 0, 65536, 65554, 0, 65540, 65555, 0, 131073, 131072, 0, 131076, 131073, 0, 65544, 131074, 0, 65543, 131075, 0, 0, 131076, 0, 0, 131077, 0, 4, 131078, 0, 65537, 131079, 0, 0, 131080, 0, 0, 131081, 0, 131074, 131082, 0, 0, 131083, 0, 0, 131084, 0, 65542, 131085, 0, 0, 131086, 0, 6, 131087, 0, 131080, 131088, 0, 131078, 131089, 0, 65542, 131090, 0, 131077, 131091, 0, 5, 196608, 0, 0, 196609, 0, 131074, 196610, 0, 0, 196611, 0, 0, 196612, 0, 65540, 196613, 0, 8, 196614, 0, 0, 196615, 0, 0, 196616, 0, 6, 196617, 0, 0, 196618, 0, 0, 196619, 0, 65540, 196620, 0, 0, 196621, 0, 0, 196622, 0, 65538, 196623, 0, 0, 196624, 0, 65541, 196625, 0, 131078, 196626, 0, 131075, 196627, 0, 65543, 262144, 0, 2, 262145, 0, 3, 262146, 0, 3, 262147, 0, 131073, 262148, 0, 1, 262149, 0, 3, 262150, 0, 65543, 262151, 0, 65536, 262152, 0, 2, 262153, 0, 131073, 262154, 0, 0, 262155, 0, 65539, 262156, 0, 131079, 262157, 0, 131072, 262158, 0, 0, 262159, 0, 131074, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 131078, 327680, 0, 0, 327681, 0, 0, 327682, 0, 131076, 327683, 0, 65540, 327684, 0, 2, 327685, 0, 0, 327686, 0, 0, 327687, 0, 131076, 327688, 0, 8, 327689, 0, 0, 327690, 0, 1, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 7, 327696, 0, 131072, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 393216, 0, 131076, 393217, 0, 65540, 393218, 0, 4, 393219, 0, 65538, 393220, 0, 65539, 393221, 0, 131075, 393222, 0, 0, 393223, 0, 1, 393224, 0, 3, 393225, 0, 0, 393226, 0, 131079, 393227, 0, 1, 393228, 0, 65540, 393229, 0, 4, 393230, 0, 131073, 393231, 0, 2, 393232, 0, 7, 393233, 0, 1, 393234, 0, 65537, 393235, 0, 131078, 458752, 0, 131079, 458753, 0, 5, 458754, 0, 0, 458755, 0, 131077, 458756, 0, 0, 458757, 0, 131079, 458758, 0, 5, 458759, 0, 0, 458760, 0, 6, 458761, 0, 2, 458762, 0, 131075, 458763, 0, 0, 458764, 0, 65540, 458765, 0, 0, 458766, 0, 0, 458767, 0, 3, 458768, 0, 0, 458769, 0, 65537, 458770, 0, 65537, 458771, 0, 0, 524288, 0, 65538, 524289, 0, 0, 524290, 0, 131073, 524291, 0, 0, 524292, 0, 8, 524293, 0, 131079, 524294, 0, 0, 524295, 0, 0, 524296, 0, 65538, 524297, 0, 131073, 524298, 0, 1, 524299, 0, 65544, 524300, 0, 8, 524301, 0, 65540, 524302, 0, 131079, 524303, 0, 65542, 524304, 0, 65538, 524305, 0, 0, 524306, 0, 65541, 524307, 0, 8, 589824, 0, 0, 589825, 0, 131077, 589826, 0, 65540, 589827, 0, 65544, 589828, 0, 65541, 589829, 0, 131079, 589830, 0, 0, 589831, 0, 131076, 589832, 0, 131080, 589833, 0, 131073, 589834, 0, 0, 589835, 0, 131072, 589836, 0, 65536, 589837, 0, 0, 589838, 0, 0, 589839, 0, 131078, 589840, 0, 131072, 589841, 0, 65538, 589842, 0, 0, 589843, 0, 0, 655360, 0, 131079, 655361, 0, 6, 655362, 0, 65540, 655363, 0, 4, 655364, 0, 131079, 655365, 0, 131078, 655366, 0, 131078, 655367, 0, 0, 655368, 0, 131073, 655369, 0, 3, 655370, 0, 65538, 655371, 0, 65541, 655372, 0, 131073, 655373, 0, 131080, 655374, 0, 131077, 655375, 0, 1, 655376, 0, 65543, 655377, 0, 0, 655378, 0, 5, 655379, 0, 0, 720896, 0, 65540, 720897, 0, 65536, 720898, 0, 0, 720899, 0, 1, 720900, 0, 0, 720901, 0, 0, 720902, 0, 3, 720903, 0, 65544, 720904, 0, 131078, 720905, 0, 65539, 720906, 0, 65539, 720907, 0, 131079, 720908, 0, 131075, 720909, 0, 131073, 720910, 0, 0, 720911, 0, 65541, 720912, 0, 65536, 720913, 0, 131076, 720914, 0, 65537, 720915, 0, 0 )
+
+[node name="YSort" type="YSort" parent="."]
+script = ExtResource( 4 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 848, 159 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="EnemyTest" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 664, 455 )
+
+[node name="Rocks" type="YSort" parent="YSort"]
+
+[node name="Rock-B" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 675, 543 )
+
+[node name="Rock-B3" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 608, 255 )
+
+[node name="Rock-B2" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 765, 511 )
+
+[node name="Rock-D" parent="YSort/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 576, 511 )
+
+[node name="Rock-D5" parent="YSort/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 104, 663 )
+
+[node name="Rock-E" parent="YSort/Rocks" instance=ExtResource( 9 )]
+position = Vector2( 256, 527 )
+
+[node name="Rock-B4" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 72, 159 )
+
+[node name="Rock-B5" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 128, 207 )
+
+[node name="Rock-B6" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 546, 318 )
+
+[node name="Rock-D2" parent="YSort/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 72, 215 )
+
+[node name="Rock-E2" parent="YSort/Rocks" instance=ExtResource( 9 )]
+position = Vector2( 96, 183 )
+
+[node name="Rock-B7" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 680, 223 )
+
+[node name="Rock-B13" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 546, 447 )
+
+[node name="Rock-B8" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 831, 447 )
+
+[node name="Rock-B9" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 831, 319 )
+
+[node name="Rock-D3" parent="YSort/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 836, 382 )
+
+[node name="Rock-E3" parent="YSort/Rocks" instance=ExtResource( 9 )]
+position = Vector2( 772, 255 )
+
+[node name="Rock-B10" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 1184, 30 )
+
+[node name="Rock-B11" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 1240, 78 )
+
+[node name="Rock-B12" parent="YSort/Rocks" instance=ExtResource( 10 )]
+position = Vector2( 1248, 30 )
+
+[node name="Rock-D4" parent="YSort/Rocks" instance=ExtResource( 7 )]
+position = Vector2( 1184, 86 )
+
+[node name="Rock-E4" parent="YSort/Rocks" instance=ExtResource( 9 )]
+position = Vector2( 1208, 54 )
+
+[node name="Borders" type="Node2D" parent="."]
+script = ExtResource( 12 )
+
+[node name="Closed" type="TileMap" parent="Borders"]
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 13 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 5, 0, 1, 2, 0, 3, 25, 0, 8, 22, 0, 9, 2, 0, 11, 1, 0, 13, 2, 0, 15, 1, 0, 17, 2, 0, 19, 6, 0, 131072, 7, 0, 131091, 11, 0, 262144, 9, 0, 262163, 10, 0, 393216, 7, 0, 393235, 12, 0, 524288, 9, 0, 524307, 10, 0, 655360, 17, 0, 655361, 13, 0, 655363, 15, 0, 655365, 14, 0, 655367, 15, 0, 655369, 14, 0, 655371, 15, 0, 655373, 13, 0, 655375, 14, 0, 655377, 13, 0, 655379, 19, 0 )
+
+[node name="MusicSlider" type="HSlider" parent="."]
+visible = false
+margin_left = 216.0
+margin_top = 472.0
+margin_right = 600.0
+margin_bottom = 632.0
+step = 5.0
+ticks_on_borders = true
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MusicSlider"]
+margin_top = 24.0
+margin_right = 96.0
+margin_bottom = 55.0
+rect_scale = Vector2( 4, 4 )
+text = "0
+"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttackSlider" type="HSlider" parent="."]
+visible = false
+margin_left = 728.0
+margin_top = 456.0
+margin_right = 1120.0
+margin_bottom = 648.0
+step = 5.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="AttackSlider"]
+visible = false
+anchor_right = 0.408
+anchor_bottom = 0.292
+margin_top = 40.0
+margin_right = -61.936
+margin_bottom = -2.064
+rect_scale = Vector2( 4, 4 )
+text = "0"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="AkEvent2D" type="Node2D" parent="Audio"]
+script = ExtResource( 11 )
+event = 1999851401
+
+[node name="AkEvent2D2" type="Node2D" parent="Audio"]
+script = ExtResource( 11 )
+event = 77978275
+
+[node name="HUDContainer" parent="." instance=ExtResource( 14 )]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+visible = false
+position = Vector2( 6, -4 )
+navpoly = SubResource( 1 )
+
+[connection signal="value_changed" from="MusicSlider" to="MusicSlider" method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="AttackSlider" to="AttackSlider" method="_on_AttackSlider_value_changed"]

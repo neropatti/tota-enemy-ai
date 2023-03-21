@@ -1,0 +1,257 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://src/Stat.gd" type="Script" id=1]
+[ext_resource path="res://assets/HUD/Stats/health.png" type="Texture" id=2]
+[ext_resource path="res://assets/HUD/Stats/health-empty.png" type="Texture" id=3]
+[ext_resource path="res://assets/HUD/Stats/health-scale.png" type="Texture" id=4]
+[ext_resource path="res://assets/HUD/Stats/health-white.png" type="Texture" id=5]
+[ext_resource path="res://assets/Fonts/TextMD.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/VFX/VFX-stat-up-heart.png" type="Texture" id=7]
+[ext_resource path="res://assets/VFX/VFX-stat-down-health.png" type="Texture" id=8]
+[ext_resource path="res://src/StatAnimationPlayer.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float whitening;
+
+void fragment() {
+    vec4 texture_color = texture(TEXTURE, UV);
+    COLOR = vec4(mix(texture_color.rgb, vec3(1,1,1), whitening), texture_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/whitening = 0.0
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 7 )
+region = Rect2( 62, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 124, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 186, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 248, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 310, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 372, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 7 )
+region = Rect2( 434, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 7 )
+region = Rect2( 496, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 7 )
+region = Rect2( 558, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 7 )
+region = Rect2( 620, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 7 )
+region = Rect2( 682, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 7 )
+region = Rect2( 744, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 7 )
+region = Rect2( 806, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 7 )
+region = Rect2( 868, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 7 )
+region = Rect2( 930, 0, 62, 67 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 8 )
+region = Rect2( 62, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 8 )
+region = Rect2( 124, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 8 )
+region = Rect2( 186, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 8 )
+region = Rect2( 248, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 8 )
+region = Rect2( 310, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 8 )
+region = Rect2( 372, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 8 )
+region = Rect2( 434, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 8 )
+region = Rect2( 496, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 8 )
+region = Rect2( 558, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 8 )
+region = Rect2( 620, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 8 )
+region = Rect2( 682, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 8 )
+region = Rect2( 744, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 8 )
+region = Rect2( 806, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 8 )
+region = Rect2( 868, 0, 62, 67 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 8 )
+region = Rect2( 930, 0, 62, 67 )
+
+[sub_resource type="SpriteFrames" id=36]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[node name="HealthStat" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1048.0
+margin_bottom = -656.0
+rect_min_size = Vector2( 128, 56 )
+rect_pivot_offset = Vector2( 21.135, 41.4158 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatBackground" type="TextureRect" parent="."]
+margin_right = 116.0
+margin_bottom = 27.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = 50.0
+margin_top = 12.0
+margin_right = 140.0
+margin_bottom = 25.0
+rect_scale = Vector2( 2, 2 )
+max_value = 1000.0
+value = 500.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatIconOverlay" type="TextureRect" parent="."]
+self_modulate = Color( 1, 0.933333, 0.933333, 0 )
+material = SubResource( 2 )
+margin_left = 12.0
+margin_top = 14.0
+margin_right = 25.0
+margin_bottom = 27.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 9.76563e-05
+anchor_top = 0.000173611
+anchor_right = 9.76563e-05
+anchor_bottom = 0.000173611
+margin_left = 47.9773
+margin_top = 41.9889
+margin_right = 223.977
+margin_bottom = 63.9889
+rect_pivot_offset = Vector2( 50.0884, -12.3201 )
+custom_colors/font_color = Color( 0.901961, 0.901961, 0.909804, 1 )
+custom_colors/font_color_shadow = Color( 0.223529, 0.223529, 0.227451, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "500/1K"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatUpAnimation" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 25, 27 )
+scale = Vector2( 0.806452, 0.80597 )
+frames = SubResource( 19 )
+frame = 4
+
+[node name="StatDownAnimation" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 25, 27 )
+scale = Vector2( 0.806452, 0.80597 )
+frames = SubResource( 36 )
+frame = 8
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" parent="." instance=ExtResource( 10 )]

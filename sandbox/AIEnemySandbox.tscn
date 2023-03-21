@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/Locations/Forest/ForestFlooring.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/AI/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sandbox/YSort.gd" type="Script" id=4]
+[ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sandbox/EnemySandbox.gd" type="Script" id=8]
+[ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-E.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-B.tscn" type="PackedScene" id=10]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 296, 351, 296, 191, 1112, 135, 1280, 135, 1088, 576, 920, 576, 1088, 688, 1280, 767, 0, 759, 920, 688, 0, 63, 1112, 63, 88, 191, 88, 351 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 8, 9 ), PoolIntArray( 3, 7, 6, 4 ), PoolIntArray( 10, 11, 2, 1, 12 ), PoolIntArray( 8, 10, 12, 13 ), PoolIntArray( 9, 8, 13, 0, 5 ) ]
+outlines = [ PoolVector2Array( 0, 63, 1112, 63, 1112, 135, 1280, 135, 1280, 767, 0, 759 ), PoolVector2Array( 88, 191, 88, 351, 296, 351, 296, 191 ), PoolVector2Array( 920, 576, 920, 688, 1088, 688, 1088, 576 ) ]
+
+[node name="EnemySandbox" type="Node2D"]
+position = Vector2( 0, 1 )
+script = ExtResource( 8 )
+
+[node name="TileMap" type="TileMap" parent="."]
+use_parent_material = true
+scale = Vector2( 2, 2 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 65538, 1, 0, 65538, 2, 0, 1, 3, 0, 65540, 4, 0, 65542, 5, 0, 65538, 6, 0, 131075, 7, 0, 65544, 8, 0, 131080, 9, 0, 131072, 10, 0, 5, 11, 0, 65539, 12, 0, 131080, 13, 0, 4, 14, 0, 131076, 15, 0, 2, 16, 0, 65539, 17, 0, 5, 18, 0, 7, 19, 0, 65536, 65536, 0, 65542, 65537, 0, 7, 65538, 0, 0, 65539, 0, 0, 65540, 0, 5, 65541, 0, 131076, 65542, 0, 65539, 65543, 0, 0, 65544, 0, 131074, 65545, 0, 131079, 65546, 0, 3, 65547, 0, 65540, 65548, 0, 0, 65549, 0, 2, 65550, 0, 0, 65551, 0, 7, 65552, 0, 6, 65553, 0, 65538, 65554, 0, 3, 65555, 0, 0, 131072, 0, 65543, 131073, 0, 0, 131074, 0, 131080, 131075, 0, 1, 131076, 0, 8, 131077, 0, 131076, 131078, 0, 131078, 131079, 0, 2, 131080, 0, 131080, 131081, 0, 0, 131082, 0, 2, 131083, 0, 65536, 131084, 0, 131079, 131085, 0, 1, 131086, 0, 4, 131087, 0, 6, 131088, 0, 8, 131089, 0, 131078, 131090, 0, 131078, 131091, 0, 65544, 196608, 0, 65537, 196609, 0, 65539, 196610, 0, 131077, 196611, 0, 0, 196612, 0, 131078, 196613, 0, 0, 196614, 0, 7, 196615, 0, 2, 196616, 0, 0, 196617, 0, 4, 196618, 0, 0, 196619, 0, 131075, 196620, 0, 65536, 196621, 0, 65537, 196622, 0, 131075, 196623, 0, 131075, 196624, 0, 2, 196625, 0, 0, 196626, 0, 65541, 196627, 0, 4, 262144, 0, 131074, 262145, 0, 131078, 262146, 0, 131077, 262147, 0, 0, 262148, 0, 131079, 262149, 0, 4, 262150, 0, 65537, 262151, 0, 131074, 262152, 0, 0, 262153, 0, 65544, 262154, 0, 0, 262155, 0, 65543, 262156, 0, 2, 262157, 0, 131075, 262158, 0, 65544, 262159, 0, 7, 262160, 0, 65538, 262161, 0, 65536, 262162, 0, 65540, 262163, 0, 131072, 327680, 0, 65540, 327681, 0, 131073, 327682, 0, 1, 327683, 0, 65543, 327684, 0, 0, 327685, 0, 1, 327686, 0, 131075, 327687, 0, 2, 327688, 0, 2, 327689, 0, 6, 327690, 0, 0, 327691, 0, 131075, 327692, 0, 131078, 327693, 0, 131080, 327694, 0, 0, 327695, 0, 131079, 327696, 0, 2, 327697, 0, 5, 327698, 0, 65537, 327699, 0, 5, 393216, 0, 65537, 393217, 0, 65541, 393218, 0, 65541, 393219, 0, 131072, 393220, 0, 65536, 393221, 0, 65544, 393222, 0, 131079, 393223, 0, 0, 393224, 0, 65539, 393225, 0, 65537, 393226, 0, 0, 393227, 0, 65543, 393228, 0, 65542, 393229, 0, 131080, 393230, 0, 0, 393231, 0, 0, 393232, 0, 1, 393233, 0, 131079, 393234, 0, 65543, 393235, 0, 65540, 458752, 0, 4, 458753, 0, 0, 458754, 0, 131075, 458755, 0, 131072, 458756, 0, 8, 458757, 0, 65539, 458758, 0, 65542, 458759, 0, 8, 458760, 0, 65542, 458761, 0, 0, 458762, 0, 0, 458763, 0, 65544, 458764, 0, 65540, 458765, 0, 65541, 458766, 0, 5, 458767, 0, 0, 458768, 0, 131076, 458769, 0, 6, 458770, 0, 5, 458771, 0, 6, 524288, 0, 65540, 524289, 0, 65541, 524290, 0, 0, 524291, 0, 65543, 524292, 0, 6, 524293, 0, 0, 524294, 0, 65536, 524295, 0, 65541, 524296, 0, 131075, 524297, 0, 131073, 524298, 0, 131073, 524299, 0, 3, 524300, 0, 65537, 524301, 0, 5, 524302, 0, 0, 524303, 0, 131076, 524304, 0, 65536, 524305, 0, 131078, 524306, 0, 131080, 524307, 0, 131077, 589824, 0, 5, 589825, 0, 0, 589826, 0, 7, 589827, 0, 131074, 589828, 0, 65537, 589829, 0, 7, 589830, 0, 131076, 589831, 0, 6, 589832, 0, 7, 589833, 0, 131076, 589834, 0, 65542, 589835, 0, 131072, 589836, 0, 0, 589837, 0, 0, 589838, 0, 8, 589839, 0, 131076, 589840, 0, 65544, 589841, 0, 1, 589842, 0, 131078, 589843, 0, 0, 655360, 0, 131074, 655361, 0, 131073, 655362, 0, 65542, 655363, 0, 131080, 655364, 0, 0, 655365, 0, 131080, 655366, 0, 65539, 655367, 0, 131072, 655368, 0, 1, 655369, 0, 65543, 655370, 0, 65542, 655371, 0, 5, 655372, 0, 131072, 655373, 0, 1, 655374, 0, 131080, 655375, 0, 131079, 655376, 0, 131072, 655377, 0, 1, 655378, 0, 131076, 655379, 0, 6, 720896, 0, 131072, 720897, 0, 131074, 720898, 0, 131072, 720899, 0, 131074, 720900, 0, 1, 720901, 0, 65540, 720902, 0, 131079, 720903, 0, 65538, 720904, 0, 131074, 720905, 0, 65539, 720906, 0, 5, 720907, 0, 65539, 720908, 0, 65537, 720909, 0, 131075, 720910, 0, 4, 720911, 0, 6, 720912, 0, 5, 720913, 0, 131072, 720914, 0, 131077, 720915, 0, 131074 )
+
+[node name="YSort" type="YSort" parent="."]
+script = ExtResource( 4 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 277, 378 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="EnemyTest" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 744, 679 )
+wandering_distance = 64.0
+
+[node name="EnemyTest2" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 744, 679 )
+wandering_distance = 64.0
+
+[node name="EnemyTest3" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 288, 559 )
+wandering_distance = 128.0
+
+[node name="EnemyTest4" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 1088, 527 )
+wandering_distance = 64.0
+
+[node name="EnemyTest5" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 920, 231 )
+wandering_distance = 64.0
+
+[node name="EnemyTest6" parent="YSort/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 440, 215 )
+wandering_distance = 64.0
+
+[node name="Rock-B" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 552, 367 )
+
+[node name="Rock-B3" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 528, 455 )
+
+[node name="Rock-B2" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 600, 335 )
+
+[node name="Rock-D" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 656, 495 )
+
+[node name="Rock-D5" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 600, 503 )
+
+[node name="Rock-E" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 520, 412 )
+
+[node name="Rock-B4" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 168, 239 )
+
+[node name="Rock-B5" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 224, 287 )
+
+[node name="Rock-B6" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 232, 239 )
+
+[node name="Rock-D2" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 168, 295 )
+
+[node name="Rock-E2" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 192, 263 )
+
+[node name="Rock-B7" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 664, 343 )
+
+[node name="Rock-B13" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 544, 503 )
+
+[node name="Rock-B8" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 712, 431 )
+
+[node name="Rock-B9" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 696, 463 )
+
+[node name="Rock-D3" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 1011, 643 )
+
+[node name="Rock-E3" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 696, 383 )
+
+[node name="Rock-B10" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 1184, 30 )
+
+[node name="Rock-B11" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 1240, 78 )
+
+[node name="Rock-B12" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 1248, 30 )
+
+[node name="Rock-D4" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 1184, 86 )
+
+[node name="Rock-E4" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 1208, 54 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+visible = false
+position = Vector2( 0, -1 )
+navpoly = SubResource( 1 )
