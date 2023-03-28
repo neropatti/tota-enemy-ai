@@ -23,6 +23,7 @@ export(float) var enemy_sound_detection_zone := 250.0
 onready var audio = $Audio
 onready var hit_box = $Areas/HitBox
 onready var hurt_box = $Areas/HurtBox
+onready var predatory_zone: Area2D = $Areas/PredatoryZone
 onready var stats_value_change = $StatValueChange
 onready var hurt_cooldown = $HurtCooldown
 onready var state_machine = $StateMachine
@@ -45,7 +46,10 @@ var original_allocated_position
 var move_type = MOVE_TYPE.WALK
 var velocity: Vector2 = Vector2.ZERO
 var last_position_player_spotted: Vector2
+var last_position_player_predatory: Vector2
 var longest_distance_point = global_position
+
+var player_in_predatory_zone = null
 
 
 func _init():
@@ -84,6 +88,9 @@ func _add_listeners() -> void:
 	navigation_agent.connect("velocity_computed", self, "_on_velocity_computed")
 	fov.connect("target_enter", self, "_on_target_enter")
 	fov.connect("target_exit", self, "_on_target_exit")
+	
+	predatory_zone.connect("body_entered", self, "_on_target_predatory_enter")
+	predatory_zone.connect("body_exited", self, "_on_target_predatory_exited")
 
 func _remove_listeners() -> void:
 	navigation_agent.disconnect("path_changed", self, "_on_path_changed")
@@ -395,3 +402,21 @@ func _on_hurt_box_area_entered(area: Area2D):
 #		trigger_hurt()
 #	else:
 #		trigger_death()
+
+
+func _on_target_predatory_enter(body: PhysicsBody2D) -> void:
+	if body.is_in_group("player"):
+		player_in_predatory_zone = body
+
+
+func _on_target_predatory_exited(body) -> void:
+	if body.is_in_group("player") and body == player_in_predatory_zone:
+		player_in_predatory_zone = null
+		last_position_player_predatory = body.global_position
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=2]
+[gd_scene load_steps=137 format=2]
 
 [ext_resource path="res://src/AI/EnemyAI.gd" type="Script" id=1]
 [ext_resource path="res://addons/beehave/nodes/composites/selector.gd" type="Script" id=2]
@@ -41,11 +41,13 @@
 [ext_resource path="res://src/AI/Actions/ShowEnemyAlertAction.gd" type="Script" id=39]
 [ext_resource path="res://src/AI/Actions/StopPlayerLeftCountdownTimerAction.gd" type="Script" id=40]
 [ext_resource path="res://addons/beehave/nodes/composites/sequence.gd" type="Script" id=41]
+[ext_resource path="res://src/AI/Conditions/IsPredatoryMoodCondition.gd" type="Script" id=42]
 [ext_resource path="res://src/AI/Actions/ChargeAtPlayerAction.gd" type="Script" id=43]
 [ext_resource path="res://src/AI/Actions/SetPlayerPositionTargetAction.gd" type="Script" id=44]
 [ext_resource path="res://src/AI/Conditions/HasArrivedAtPlayerCondition.gd" type="Script" id=45]
 [ext_resource path="res://src/AI/Actions/ResetPlayerPositionAction.gd" type="Script" id=46]
 [ext_resource path="res://src/AI/Actions/ChangeMoodAction.gd" type="Script" id=47]
+[ext_resource path="res://src/PredatoryZone.tscn" type="PackedScene" id=48]
 [ext_resource path="res://src/AI/Actions/PreChargeAction.gd" type="Script" id=49]
 [ext_resource path="res://src/AI/Actions/ChargeStateAction.gd" type="Script" id=50]
 [ext_resource path="res://src/AI/SetEnemyStateAction.gd" type="Script" id=51]
@@ -1763,6 +1765,7 @@ tracks/2/keys = {
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 8 )
+mood = 5
 wandering_distance = 400.0
 wait_move_duration = 10.0
 
@@ -2067,6 +2070,9 @@ script = ExtResource( 41 )
 
 [node name="PlayerNotNearby" type="Node" parent="EnemyAI/Either/Angry/SelectorComposite/PlayerLeft"]
 script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="PlayerNearbyCondition" type="Node" parent="EnemyAI/Either/Angry/SelectorComposite/PlayerLeft/PlayerNotNearby"]
 script = ExtResource( 11 )
@@ -2191,6 +2197,134 @@ state_to_check = "attacked"
 [node name="ResetEnemyStateAction" type="Node" parent="EnemyAI/Either/Angry/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attacked"]
 script = ExtResource( 54 )
 
+[node name="Predatory" type="Node" parent="EnemyAI/Either"]
+script = ExtResource( 5 )
+
+[node name="IsPredatoryMoodCondition" type="Node" parent="EnemyAI/Either/Predatory"]
+script = ExtResource( 42 )
+
+[node name="DebugRecordIteration" type="Node" parent="EnemyAI/Either/Predatory"]
+script = ExtResource( 35 )
+
+[node name="SelectorComposite" type="Node" parent="EnemyAI/Either/Predatory"]
+script = ExtResource( 2 )
+
+[node name="PlayerIsVisible" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite"]
+script = ExtResource( 41 )
+
+[node name="PlayerNearbyCondition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible"]
+script = ExtResource( 11 )
+
+[node name="SelectorStarComposite" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible"]
+script = ExtResource( 56 )
+
+[node name="SpottedPlayer" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
+script = ExtResource( 5 )
+
+[node name="IsEnemyStateEmptyCondition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/SpottedPlayer"]
+script = ExtResource( 37 )
+
+[node name="SetEnemyStateAction_SpottedPlayer" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/SpottedPlayer"]
+script = ExtResource( 51 )
+state_to_change_to = "spotted_player"
+
+[node name="PreCharge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
+script = ExtResource( 5 )
+
+[node name="IsEnemyStateCondition_SpottedPlayer" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/PreCharge"]
+script = ExtResource( 52 )
+state_to_check = "spotted_player"
+
+[node name="PreChargeAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/PreCharge"]
+script = ExtResource( 49 )
+
+[node name="SetEnemyStateAction_PreCharge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/PreCharge"]
+script = ExtResource( 51 )
+state_to_change_to = "precharge"
+
+[node name="SetWaitRandomTimeAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/PreCharge"]
+script = ExtResource( 14 )
+wait_duration = 1.0
+wait_duration_multiplier = 1.0
+
+[node name="SetPlayerPositionTargetAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/PreCharge"]
+script = ExtResource( 44 )
+
+[node name="SetEnemyStateAction_ReadyToCharge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/PreCharge"]
+script = ExtResource( 51 )
+state_to_change_to = "ready_to_charge"
+
+[node name="Charge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
+script = ExtResource( 5 )
+
+[node name="IsEnemyStateCondition_ReadyToCharge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charge"]
+script = ExtResource( 52 )
+state_to_check = "ready_to_charge"
+
+[node name="ChargeStateAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charge"]
+script = ExtResource( 50 )
+
+[node name="SetEnemyStateAction_Charge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charge"]
+script = ExtResource( 51 )
+state_to_change_to = "charge"
+
+[node name="Charging" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
+script = ExtResource( 41 )
+
+[node name="IsEnemyStateCondition_Charge" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charging"]
+script = ExtResource( 52 )
+state_to_check = "charge"
+
+[node name="IsChargingStateCondition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charging"]
+script = ExtResource( 52 )
+state_to_check = "charge"
+
+[node name="ChargeAtPlayerAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charging"]
+script = ExtResource( 43 )
+
+[node name="HasArrivedAtPlayerCondition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charging"]
+script = ExtResource( 45 )
+
+[node name="SetEnemyStateAction_Charging" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Charging"]
+script = ExtResource( 51 )
+state_to_change_to = "charging"
+
+[node name="Attack" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
+script = ExtResource( 5 )
+
+[node name="IsEnemyStateCondition_Charging" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attack"]
+script = ExtResource( 52 )
+state_to_check = "charging"
+
+[node name="AttackPlayerAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attack"]
+script = ExtResource( 36 )
+
+[node name="SetEnemyStateAction_Attack" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attack"]
+script = ExtResource( 51 )
+state_to_change_to = "attack"
+
+[node name="SetWaitRandomTimeAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attack"]
+script = ExtResource( 14 )
+wait_duration = 1.0
+wait_duration_multiplier = 1.0
+
+[node name="ResetPlayerPositionAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attack"]
+script = ExtResource( 46 )
+
+[node name="SetEnemyStateAction_Attacked" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attack"]
+script = ExtResource( 51 )
+state_to_change_to = "attacked"
+
+[node name="Attacked" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
+script = ExtResource( 5 )
+
+[node name="IsEnemyStateCondition_Attacked" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attacked"]
+script = ExtResource( 52 )
+state_to_check = "attacked"
+
+[node name="ResetEnemyStateAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/Attacked"]
+script = ExtResource( 54 )
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0
 target_desired_distance = 2.0
@@ -2244,6 +2378,8 @@ self_modulate = Color( 0.184314, 1, 0, 1 )
 rotation = 1.5708
 shape = SubResource( 4 )
 disabled = true
+
+[node name="PredatoryZone" parent="Areas" instance=ExtResource( 48 )]
 
 [node name="Timers" type="Node" parent="."]
 
