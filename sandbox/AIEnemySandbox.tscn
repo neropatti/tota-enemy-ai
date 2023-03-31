@@ -10,9 +10,9 @@
 [ext_resource path="res://src/Locations/Forest/Props/Atoms/Rock-B.tscn" type="PackedScene" id=10]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 296, 351, 296, 191, 1112, 135, 1280, 135, 1088, 576, 920, 576, 1088, 688, 1280, 767, 0, 759, 920, 688, 0, 63, 1112, 63, 88, 191, 88, 351 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 8, 9 ), PoolIntArray( 3, 7, 6, 4 ), PoolIntArray( 10, 11, 2, 1, 12 ), PoolIntArray( 8, 10, 12, 13 ), PoolIntArray( 9, 8, 13, 0, 5 ) ]
-outlines = [ PoolVector2Array( 0, 63, 1112, 63, 1112, 135, 1280, 135, 1280, 767, 0, 759 ), PoolVector2Array( 88, 191, 88, 351, 296, 351, 296, 191 ), PoolVector2Array( 920, 576, 920, 688, 1088, 688, 1088, 576 ) ]
+vertices = PoolVector2Array( 266, 324, 281, 236, 1112, 135, 1280, 135, 616, 294, 778, 416, 760, 351, 1280, 767, 1042, 610, 0, 63, 1112, 63, 226, 196, 143, 197, 705, 322, 1062, 671, 974, 608, 766, 478, 962, 637, 687, 535, 624, 553, 970, 672, 0, 759, 116, 255, 128, 335, 199, 346, 483, 514, 472, 402, 1020, 682, 539, 553, 516, 322 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 3, 7, 8 ), PoolIntArray( 9, 10, 2, 11, 12 ), PoolIntArray( 3, 6, 13 ), PoolIntArray( 7, 14, 8 ), PoolIntArray( 5, 8, 15, 16 ), PoolIntArray( 16, 15, 17, 18 ), PoolIntArray( 19, 18, 17, 20, 21 ), PoolIntArray( 2, 1, 11 ), PoolIntArray( 9, 12, 22 ), PoolIntArray( 21, 9, 22, 23 ), PoolIntArray( 21, 23, 24 ), PoolIntArray( 25, 21, 24, 0, 26 ), PoolIntArray( 27, 14, 7 ), PoolIntArray( 27, 7, 21, 20 ), PoolIntArray( 28, 19, 21 ), PoolIntArray( 25, 28, 21 ), PoolIntArray( 29, 26, 0 ), PoolIntArray( 3, 13, 4 ), PoolIntArray( 29, 0, 4 ) ]
+outlines = [ PoolVector2Array( 0, 63, 1112, 63, 1112, 135, 1280, 135, 1280, 767, 0, 759 ), PoolVector2Array( 143, 197, 116, 255, 128, 335, 199, 346, 266, 324, 281, 236, 226, 196 ), PoolVector2Array( 974, 608, 962, 637, 970, 672, 1020, 682, 1062, 671, 1042, 610 ), PoolVector2Array( 472, 402, 483, 514, 539, 553, 624, 553, 687, 535, 766, 478, 778, 416, 760, 351, 705, 322, 616, 294, 516, 322 ) ]
 
 [node name="EnemySandbox" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -37,27 +37,7 @@ position = Vector2( 277, 378 )
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="EnemyTest" parent="YSort/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 744, 679 )
-wandering_distance = 64.0
-
-[node name="EnemyTest2" parent="YSort/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 744, 679 )
-wandering_distance = 64.0
-
-[node name="EnemyTest3" parent="YSort/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 288, 559 )
-wandering_distance = 128.0
-
-[node name="EnemyTest4" parent="YSort/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 1088, 527 )
-wandering_distance = 64.0
-
-[node name="EnemyTest5" parent="YSort/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 920, 231 )
-wandering_distance = 64.0
-
-[node name="EnemyTest6" parent="YSort/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 440, 215 )
+position = Vector2( 919, 560 )
 wandering_distance = 64.0
 
 [node name="Rock-B" parent="YSort" instance=ExtResource( 10 )]
@@ -131,6 +111,5 @@ anchor_mode = 0
 current = true
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
-visible = false
 position = Vector2( 0, -1 )
 navpoly = SubResource( 1 )

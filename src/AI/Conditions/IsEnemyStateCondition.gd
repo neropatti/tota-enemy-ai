@@ -22,10 +22,9 @@ func tick(actor, blackboard):
 	assert(state_to_check != null)
 	var blackboard_state = blackboard.get("state")
 	var is_equal_state: bool = blackboard_state == state_to_check
-
+	
 	print("Checking state " + blackboard_state + " is equal to " + state_to_check)
-
+	
 	if is_equal_state:
 		return SUCCESS
-
 	return FAILURE

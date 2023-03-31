@@ -13,7 +13,8 @@ export(
 	"attack",
 	"attacked",
 	"die",
-	"hurt"
+	"hurt",
+	"predatory"
 ) var state_to_change_to
 
 

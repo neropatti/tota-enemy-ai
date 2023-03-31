@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=2]
+[gd_scene load_steps=140 format=2]
 
 [ext_resource path="res://src/AI/EnemyAI.gd" type="Script" id=1]
 [ext_resource path="res://addons/beehave/nodes/composites/selector.gd" type="Script" id=2]
@@ -57,6 +57,9 @@
 [ext_resource path="res://src/StatValues.tscn" type="PackedScene" id=55]
 [ext_resource path="res://addons/beehave/nodes/composites/selector_star.gd" type="Script" id=56]
 [ext_resource path="res://src/AI/Conditions/IsAngryMoodCondition.gd" type="Script" id=57]
+[ext_resource path="res://src/AI/Actions/SetRandomAroundPlayerPositionTargetAction.gd" type="Script" id=58]
+[ext_resource path="res://src/AI/Conditions/PlayerInPredatoryRange.gd" type="Script" id=59]
+[ext_resource path="res://src/AI/Actions/MoveToAroundTargetPosition.gd" type="Script" id=60]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.0
@@ -2209,6 +2212,34 @@ script = ExtResource( 35 )
 [node name="SelectorComposite" type="Node" parent="EnemyAI/Either/Predatory"]
 script = ExtResource( 2 )
 
+[node name="PlayerInPredatoryRange" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite"]
+script = ExtResource( 41 )
+
+[node name="PlayerInPredatoryRange" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange"]
+script = ExtResource( 59 )
+
+[node name="PlayerNotNearby" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange"]
+script = ExtResource( 7 )
+
+[node name="PlayerNearbyCondition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange/PlayerNotNearby"]
+script = ExtResource( 11 )
+
+[node name="SequenceStarComposite" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange"]
+script = ExtResource( 5 )
+
+[node name="SetEnemyStateAction_PredatoryPlayer" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange/SequenceStarComposite"]
+script = ExtResource( 51 )
+state_to_change_to = "predatory"
+
+[node name="SetRandomAroundPlayerPositionTarget" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange/SequenceStarComposite"]
+script = ExtResource( 58 )
+
+[node name="MoveToAroundTargetPosition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange/SequenceStarComposite"]
+script = ExtResource( 60 )
+
+[node name="ChargeStateAction" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerInPredatoryRange/SequenceStarComposite"]
+script = ExtResource( 50 )
+
 [node name="PlayerIsVisible" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite"]
 script = ExtResource( 41 )
 
@@ -2220,9 +2251,6 @@ script = ExtResource( 56 )
 
 [node name="SpottedPlayer" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite"]
 script = ExtResource( 5 )
-
-[node name="IsEnemyStateEmptyCondition" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/SpottedPlayer"]
-script = ExtResource( 37 )
 
 [node name="SetEnemyStateAction_SpottedPlayer" type="Node" parent="EnemyAI/Either/Predatory/SelectorComposite/PlayerIsVisible/SelectorStarComposite/SpottedPlayer"]
 script = ExtResource( 51 )
